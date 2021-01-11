@@ -11,9 +11,7 @@ typedef struct {
 typedef struct {
 	
 	char CIN[10],
-	     Nom_Pr_V[50],
-	     Nom_Pr_V2[50],
-	     Nom_Pr_V3[50];
+	     Nom_Pr_V[50] ;
 	     
 }electeur;
 
@@ -145,7 +143,6 @@ void trier(int n){
 		}
 	}
 }
-int rt=1;
 
 void calcul(int nbPr , int nbE){
 	
@@ -167,15 +164,8 @@ void calcul(int nbPr , int nbE){
 	}
 	
 	trier(nbE);
-	for ( i = 0; i < nbPr - countT ; i++)
-	{
-		if(list_Coun[i].prsnt==list_Coun[i+1].prsnt)
-		cmp2++;
-		else
-		break;
-	}
-	if(cmp2 == nbPr - countT)
-	    rt = 0;
+
+	
 	
 	//Affichage
 	for ( i = 0; i < nbPr - countT ; i++)
@@ -205,19 +195,19 @@ void tour1(int n)
 	    cmp =0,
 		colm=n;
 	
-	while( i < n){
+	while( i < n && valider1(n) == 0){
 		
 		if(list_Coun[i].prsnt > 15){
 		strcpy(list_Pr[cmp].list_P , list_Coun[i].Nom_Pr);
 		cmp++;
 		colm--;
+		countT=colm;
 		}
 		i++;
 	}
 	
-	if(cmp == n-countT || cmp == n-countT-1 )
-	   rt=0;
-    countT=colm;
+	
+    
 }
 
 void tour2(int n)
@@ -244,10 +234,43 @@ void tour2(int n)
 			
 		} 
 	}
-	if(colm == n-countT || colm == n-countT-1 )
-	   rt=0;
+	
 	   
     countT += colm;
+}
+
+int valider1(int nbPr){
+	int colm=0,i;
+	for(i=nbPr-countT-1; i>0 ;  i--){
+		
+		if(list_Coun[i].prsnt == list_Coun[i-1].prsnt){
+			colm++;
+		}
+			
+	} 
+//
+	if(colm == nbPr-countT || colm == nbPr-countT-1 )
+	   return 1;
+	   else
+	
+	
+	return 0;
+}
+
+int valider2(int nbPr){
+	int colm=0,i;
+	for ( i = 0; i < nbPr - countT ; i++)
+	{
+		if(list_Coun[i].prsnt==list_Coun[i+1].prsnt)
+		colm++;
+		else
+		break;
+	}
+
+	if(colm == nbPr-countT )
+	   return 1;
+	   else
+	return 0;
 }
 
 void  main() 
@@ -265,13 +288,16 @@ void  main()
 	
 	electeurs(NB_Electeurs);
 	calcul(Nb_President,NB_Electeurs);
-	
-	while(rt==0){
+	tour1(Nb_President);
+	while(valider1(Nb_President) == 1 || valider2(Nb_President) == 1){
 		vote2(NB_Electeurs,Nb_President);
 		calcul(Nb_President,NB_Electeurs);
+		tour1(Nb_President);
 	}
-	rt=1;
-	tour1(Nb_President);
+	
+	printf("return valider1=  %i , return valider2 = %i ",valider1(Nb_President),valider2(Nb_President));
+	
+	
     for ( i = 0 ; i < Nb_President - countT ; i++)
 	{
     //Affichage les president passe souivant Deuxieme tour
@@ -283,12 +309,12 @@ void  main()
 	vote2(NB_Electeurs,Nb_President);
 	calcul(Nb_President,NB_Electeurs);
 	
-	while(rt==0){
-		vote2(NB_Electeurs,Nb_President);
-		calcul(Nb_President,NB_Electeurs);
-		
-	}
-	rt=1;
+//	while(rt==0){
+//		vote2(NB_Electeurs,Nb_President);
+//		calcul(Nb_President,NB_Electeurs);
+//		
+//	}
+	
 	tour2(Nb_President);
 
     for ( i = 0 ; i < Nb_President - countT ; i++)
@@ -302,15 +328,15 @@ void  main()
 	 vote2(NB_Electeurs,Nb_President);
  	 calcul(Nb_President,NB_Electeurs);
  	 
-	 while(rt == 0){
-		vote2(NB_Electeurs,Nb_President);
-		calcul(Nb_President,NB_Electeurs);
-		
-	}
+//	 while(rt == 0){
+//		vote2(NB_Electeurs,Nb_President);
+//		calcul(Nb_President,NB_Electeurs);
+//		
+//	}
 	
 	
 	
-	 rt=1;
+	
 	 tour2(Nb_President);
 	  for ( i = 0 ; i < Nb_President - countT ; i++)
 	  {
