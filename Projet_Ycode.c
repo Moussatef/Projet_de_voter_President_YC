@@ -163,10 +163,6 @@ void calcul(int nbPr , int nbE){
 		list_Coun[i].prsnt = p ;
 	}
 	
-	trier(nbE);
-
-	
-	
 	//Affichage
 	for ( i = 0; i < nbPr - countT ; i++)
 	{
