@@ -40,10 +40,12 @@ for( i = 0 ; i < n ; i++)
     }
     printf("\n");
 //Affichage les presidants
+printf("************************************\n");
     for( i = 0 ; i < n ; i++)
 	{
-        printf("Le president  %i : %s \n",i+1,list_Pr[i].list_P);
+        printf("Le president  %i : %s    \t\t*\n",i+1,list_Pr[i].list_P);
     }
+    printf("************************************\n");
 }
 
 int Rechercher(char pr[50],int n){
@@ -81,10 +83,12 @@ for ( i = 0; i < n; i++)
 	}
 }
 //Affichage
+printf("*********************************************************\n");
 for ( i = 0; i < n; i++)
 {
-    printf("Votre CIN : %s  tu vote a la president : %s \n",list_E[i].CIN,list_E[i].Nom_Pr_V);
+    printf("Votre CIN : %s  tu vote a la president : %s \t\t*\n",list_E[i].CIN,list_E[i].Nom_Pr_V);
 }
+printf("*********************************************************\n");
 }
 
 void vote2(int NbE , int NBP){
@@ -156,10 +160,12 @@ void calcul(int nbPr , int nbE){
 	}
 	
 	//Affichage
+	printf("*********************************************************************\n");
 	for ( i = 0; i < nbPr - countT ; i++)
 	{
-	        printf("president : %s  nombre de votes  : %i  porsantage : %i  \n",list_Coun[i].Nom_Pr,list_Coun[i].NB_V,list_Coun[i].prsnt);
+	        printf("president : %s  nombre de votes  : %i  porsantage : %i  \t*\n",list_Coun[i].Nom_Pr,list_Coun[i].NB_V,list_Coun[i].prsnt);
 	}
+	printf("*********************************************************************\n");
 	}
 
 void vedier(int nbPr , int nbE){
@@ -258,10 +264,11 @@ void  main()
  
  	
 	int i ,Nb_President,NB_Electeurs;
-	
+	printf("**********************************************************************\n");
 	printf("Saisir nombre des presidents (N >= 5 )! : ");
 	scanf("%i",&Nb_President);
 	presidents(Nb_President);
+	printf("**********************************************************************\n");
 	printf("Saisir nombre des electeurs (N >= 10 )! : ");
 	scanf("%i",&NB_Electeurs);
 	
@@ -277,13 +284,14 @@ void  main()
 	}
 	tour1(Nb_President);
 	
-	
+	printf("**********************************************************************\n");
     for ( i = 0 ; i < Nb_President - countT ; i++)
 	{
     //Affichage les president passe souivant Deuxieme tour
      printf("president passe souivant Deuxieme tour : %s  \n", list_Pr[i].list_P);
     
 	}
+	printf("**********************************************************************\n");
 	
 	vedier(Nb_President,NB_Electeurs);
 	vote2(NB_Electeurs,Nb_President);
@@ -296,14 +304,14 @@ void  main()
 		
 	}
 	tour2(Nb_President);
-
+    printf("**********************************************************************\n");
     for ( i = 0 ; i < Nb_President - countT ; i++)
 	{
     //Affichage les president passe souivant Troisieme tour :
      printf("president passe souivant Troisieme tour : %s  \n", list_Pr[i].list_P);
      
 	 }
-	 
+	 printf("**********************************************************************\n");
 	 vedier(Nb_President,NB_Electeurs);
 	 vote2(NB_Electeurs,Nb_President);
  	 calcul(Nb_President,NB_Electeurs);
@@ -315,12 +323,14 @@ void  main()
 		
 	}
 	 tour2(Nb_President);
+	 printf("**********************************************************************\n");
 	  for ( i = 0 ; i < Nb_President - countT ; i++)
 	  {
 	  //Affichage les president reussit :
 	   printf("Le president reussit a voter : %s  \n", list_Pr[i].list_P);
 	 
 	 }
+	 printf("**********************************************************************\n");
 
  
 
