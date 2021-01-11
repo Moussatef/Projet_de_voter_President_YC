@@ -158,14 +158,13 @@ void calcul(int nbPr , int nbE){
 	    p =cmp1*100/nbE;
 		list_Coun[i].prsnt = p ;
 	}
-	
-	//Affichage
 	printf("*********************************************************************\n");
 	for ( i = 0; i < nbPr - countT ; i++)
 	{
 	        printf("president : %s  nombre de votes  : %i  porsantage : %i  \t*\n",list_Coun[i].Nom_Pr,list_Coun[i].NB_V,list_Coun[i].prsnt);
 	}
 	printf("*********************************************************************\n");
+	
 	}
 
 void vedier(int nbPr , int nbE){
@@ -205,11 +204,6 @@ void tour2(int n)
 	int i = 0,  j , colm= 0;
 	trier(n);
 	
-//	for ( i = 0; i < n - countT ; i++)
-//{
-//    printf("president : %s  nombre de votes  : %i  porsantage : %i  \n",list_Coun[i].Nom_Pr,list_Coun[i].NB_V,list_Coun[i].prsnt);
-//}
-
 	for(i=n-countT-1; i>0 ;  i--){
 		if(list_Coun[i].prsnt < list_Coun[i-1].prsnt)
 		{
@@ -259,6 +253,22 @@ int valider2(int nbPr){
 	   return 0;
 }
 
+
+//void afficher(int nbPr){
+//	int i;
+//	
+//	trier(nbPr);
+//	//Affichage
+//printf("*********************************************************************\n");
+//	for ( i = 0; i < nbPr - countT ; i++)
+//	{
+//	        printf("president : %s  nombre de votes  : %i  porsantage : %i  \t*\n",list_Coun[i].Nom_Pr,list_Coun[i].NB_V,list_Coun[i].prsnt);
+//	}
+//	printf("*********************************************************************\n");
+//	
+//}
+
+
 void  main() 
  {
  
@@ -278,7 +288,7 @@ void  main()
 	
 	
 	while(valider1(Nb_President) == 1 || valider2(Nb_President) == 1){
-		printf("N.B: si tous les présidents nominés ont un nombre de votes ex aequo, le tour doit être refait. \n");
+		printf("N.B: Tous les presidents nomines ont un nombre de votes ex aequo, le tour doit etre refait. \n");
 		vote2(NB_Electeurs,Nb_President);
 		calcul(Nb_President,NB_Electeurs);
 	}
@@ -298,12 +308,13 @@ void  main()
 	calcul(Nb_President,NB_Electeurs);
 	
 	while(valider1(Nb_President) == 1 || valider2(Nb_President) == 1){
-		printf(" N.B: si tous les présidents nominés ont un nombre de votes ex aequo, le tour doit être refait. \n");
+		printf(" N.B: Tous les presidents nomines ont un nombre de votes ex aequo, le tour doit etre refait. \n");
 		vote2(NB_Electeurs,Nb_President);
 		calcul(Nb_President,NB_Electeurs);
 		
 	}
 	tour2(Nb_President);
+	
     printf("**********************************************************************\n");
     for ( i = 0 ; i < Nb_President - countT ; i++)
 	{
@@ -317,12 +328,13 @@ void  main()
  	 calcul(Nb_President,NB_Electeurs);
  	 
 	 while(valider1(Nb_President) == 1 || valider2(Nb_President) == 1){
-	 	printf(" N.B: si tous les présidents nominés ont un nombre de votes ex aequo, le tour doit être refait. \n");
+	 	printf(" N.B: Tous les presidents nomines ont un nombre de votes ex aequo, le tour doit etre refait. \n");
 		vote2(NB_Electeurs,Nb_President);
 		calcul(Nb_President,NB_Electeurs);
 		
 	}
 	 tour2(Nb_President);
+	 
 	 printf("**********************************************************************\n");
 	  for ( i = 0 ; i < Nb_President - countT ; i++)
 	  {
