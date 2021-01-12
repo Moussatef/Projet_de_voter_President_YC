@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
+#include <stdlib.h>
 
 typedef struct {
 	
@@ -30,8 +30,8 @@ int countT = 0;
 
 void presidents(int n){
     int i,j;
-while( n < 5 )
-    printf("le nombre %i est pas suffisant ",n);
+
+    
 //Remplisage a la table ou list  presidants
 for( i = 0 ; i < n ; i++)
 	{
@@ -58,35 +58,21 @@ int Rechercher(char pr[50],int n){
 	return cmp; 
 }
 
-
 void electeurs(int n){
     int i,t=0;
     char pr[50];
     
-while( n < 10 )
-    printf("le nombre %i est pas suffisant ",n);
-
 for ( i = 0; i < n; i++)
 {
     printf("Saisir votre CIN : ");
     scanf("%s",list_E[i].CIN);
-    t=0;
-    while(t == 0){
-    	printf("Entrez le nom du president qui a vote : ");
-		scanf("%s",pr);
-		if(Rechercher(pr,n) == 1){
-			strcpy(list_E[i].Nom_Pr_V,pr);
-			t=1;
-		}
-		else 
-		printf("Le president n'est pas sur la liste %i\n",Rechercher(pr,n));
-	}
+   
 }
 //Affichage
 printf("*********************************************************\n");
 for ( i = 0; i < n; i++)
 {
-    printf("Votre CIN : %s  tu vote a la president : %s \t\t*\n",list_E[i].CIN,list_E[i].Nom_Pr_V);
+    printf("Votre CIN : %s \t\t*\n",list_E[i].CIN);
 }
 printf("*********************************************************\n");
 }
@@ -110,6 +96,12 @@ for ( i = 0; i < NbE ; i++)
 		printf("Le president n'est pas sur la liste  \n");
     }
 }
+printf("*********************************************************\n");
+for ( i = 0; i < NbE; i++)
+{
+    printf("Votre CIN : %s  tu vote a la president : %s\% \t\t*\n",list_E[i].CIN,list_E[i].Nom_Pr_V);
+}
+printf("*********************************************************\n");
 }
 void trier(int n){
 	int   i,j, prst , nbv ;
@@ -152,7 +144,6 @@ void calcul(int nbPr , int nbE){
 				cmp1++;
 			}
 		}
-	
 		strcpy(list_Coun[i].Nom_Pr,list_Pr[i].list_P);
 		list_Coun[i].NB_V = cmp1;
 	    p =cmp1*100/nbE;
@@ -188,7 +179,7 @@ void tour1(int n)
 	    cmp =0,
 		colm=n;
 	
-	if( valider1(n) == 0 && valider2(n) == 0){
+	if( valider1(n) == 0 ){
 		for( i=0 ; i<n ; i++)
 		if(list_Coun[i].prsnt > 15){
 		strcpy(list_Pr[cmp].list_P , list_Coun[i].Nom_Pr);
@@ -210,12 +201,10 @@ void tour2(int n)
 			colm++;
 			i=0;
 		}
-		
 		else{
 			if(list_Coun[i].prsnt == list_Coun[i-1].prsnt){
 				colm++;
 			}
-			
 		} 
 	}
     countT += colm;
@@ -223,111 +212,106 @@ void tour2(int n)
 
 int valider1(int nbPr){
 	int colm=0,i;
-	for( i=nbPr-countT ; i >= 0 ;  i--){
+	for( i=nbPr-countT ; i > 0 ;  i--){
 		
 		if(list_Coun[i].prsnt == list_Coun[i-1].prsnt){
 			colm++;
 		}
-			
 	} 
 
-	if(colm == nbPr-countT || colm == nbPr-countT-1 )
+	if(colm == nbPr-countT-1  )
 	   return 1;
 	else
 	return 0;
 }
 
-int valider2(int nbPr){
-	int colm=0,i;
-	for ( i = 0; i < nbPr - countT ; i++)
-	{
-		if(list_Coun[i].prsnt==list_Coun[i+1].prsnt)
-		colm++;
-		else
-		break;
-	}
-
-	if(colm == nbPr-countT )
-	   return 1;
-	else
-	   return 0;
-}
-
-
-//void afficher(int nbPr){
-//	int i;
-//	
-//	trier(nbPr);
-//	//Affichage
-//printf("*********************************************************************\n");
-//	for ( i = 0; i < nbPr - countT ; i++)
-//	{
-//	        printf("president : %s  nombre de votes  : %i  porsantage : %i  \t*\n",list_Coun[i].Nom_Pr,list_Coun[i].NB_V,list_Coun[i].prsnt);
-//	}
-//	printf("*********************************************************************\n");
-//	
-//}
-
-
 void  main() 
  {
- 
- 	
 	int i ,Nb_President,NB_Electeurs;
-	printf("**********************************************************************\n");
+	
+	printf("\t\t\t********************/ Elections presidentielles ********************\n");
 	printf("Saisir nombre des presidents (N >= 5 )! : ");
 	scanf("%i",&Nb_President);
+	while( Nb_President  < 5 ){
+	printf("le nombre %i est pas suffisant \n",Nb_President);
+	printf("Saisir nombre des presidents (N >= 5 )! : ");
+	scanf("%i",&Nb_President);
+	}
+	
 	presidents(Nb_President);
-	printf("**********************************************************************\n");
+	printf("\t\t\t**********************************************************************\n");
 	printf("Saisir nombre des electeurs (N >= 10 )! : ");
 	scanf("%i",&NB_Electeurs);
-	
-	
+	while( NB_Electeurs < 10 ){
+		printf("le nombre %i est pas suffisant \n",NB_Electeurs);
+		printf("Saisir nombre des electeurs (N >= 10 )! : ");
+	    scanf("%i",&NB_Electeurs);
+		
+	}
+	printf("\t\t\t***********************/ Presenter les electeurs /*************************\n");
 	electeurs(NB_Electeurs);
+	printf("\t\t\t***********************/ Premier tour /*************************\n");
+	vote2(NB_Electeurs,Nb_President);
 	calcul(Nb_President,NB_Electeurs);
 	
 	
-	while(valider1(Nb_President) == 1 || valider2(Nb_President) == 1){
+	while(valider1(Nb_President) == 1 ){
 		printf("N.B: Tous les presidents nomines ont un nombre de votes ex aequo, le tour doit etre refait. \n");
+		printf("\t\t\t***********************/ Premier tour /*************************\n");
 		vote2(NB_Electeurs,Nb_President);
 		calcul(Nb_President,NB_Electeurs);
 	}
 	tour1(Nb_President);
 	
-	printf("**********************************************************************\n");
+	for( i=0 ; i < Nb_President ;  i++){
+		
+		if(list_Coun[i].prsnt >= 90){
+			printf("Le president reussit a voter : %s  \n", list_Pr[i].list_P);
+		    exit(0);
+		}
+	} 
+		
+	printf("\t\t\t**********************************************************************\n");
     for ( i = 0 ; i < Nb_President - countT ; i++)
 	{
     //Affichage les president passe souivant Deuxieme tour
-     printf("president passe souivant Deuxieme tour : %s  \n", list_Pr[i].list_P);
+     printf("president passe  Deuxieme tour : %s  \n", list_Pr[i].list_P);
     
 	}
-	printf("**********************************************************************\n");
+	printf("\t\t\t***********************/ Deuxieme tour /*************************\n");
 	
 	vedier(Nb_President,NB_Electeurs);
 	vote2(NB_Electeurs,Nb_President);
 	calcul(Nb_President,NB_Electeurs);
 	
-	while(valider1(Nb_President) == 1 || valider2(Nb_President) == 1){
+	while(valider1(Nb_President) == 1 ){
 		printf(" N.B: Tous les presidents nomines ont un nombre de votes ex aequo, le tour doit etre refait. \n");
 		vote2(NB_Electeurs,Nb_President);
 		calcul(Nb_President,NB_Electeurs);
 		
 	}
 	tour2(Nb_President);
+	for( i=0 ; i < Nb_President - countT ;  i++){
+		
+		if(list_Coun[i].prsnt >= 90){
+			printf("Le president reussit a voter : %s  \n", list_Pr[i].list_P);
+		    exit(0);
+		}
+	} 
 	
-    printf("**********************************************************************\n");
+    printf("\t\t\t**********************************************************************\n");
     for ( i = 0 ; i < Nb_President - countT ; i++)
 	{
     //Affichage les president passe souivant Troisieme tour :
-     printf("president passe souivant Troisieme tour : %s  \n", list_Pr[i].list_P);
+     printf("president passe  Troisieme tour : %s  \n", list_Pr[i].list_P);
      
 	 }
-	 printf("**********************************************************************\n");
+	 printf("\t\t\t***********************/ Troisieme tour /***************************\n");
 	 vedier(Nb_President,NB_Electeurs);
 	 vote2(NB_Electeurs,Nb_President);
  	 calcul(Nb_President,NB_Electeurs);
  	 
-	 while(valider1(Nb_President) == 1 || valider2(Nb_President) == 1){
+	 while(valider1(Nb_President) == 1 ){
 	 	printf(" N.B: Tous les presidents nomines ont un nombre de votes ex aequo, le tour doit etre refait. \n");
 		vote2(NB_Electeurs,Nb_President);
 		calcul(Nb_President,NB_Electeurs);
@@ -335,15 +319,12 @@ void  main()
 	}
 	 tour2(Nb_President);
 	 
-	 printf("**********************************************************************\n");
+	 printf("\t\t\t**********************************************************************\n");
 	  for ( i = 0 ; i < Nb_President - countT ; i++)
 	  {
 	  //Affichage les president reussit :
 	   printf("Le president reussit a voter : %s  \n", list_Pr[i].list_P);
 	 
 	 }
-	 printf("**********************************************************************\n");
-
- 
-
+	 printf("\t\t\t**********************************************************************\n");
 }
